@@ -1,6 +1,7 @@
 package com.se.redis_crud;
 
 import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,11 +11,13 @@ import java.util.List;
 public class EmployeeService {
     private HashOperations hashOperations;
     private RedisTemplate redisTemplate;
+    private ListOperations listOperations;
     private final static String EMPLOYEE_KEY = "EMPLOYEE";
 
     public EmployeeService(RedisTemplate redisTemplate){
         this.redisTemplate = redisTemplate;
         this.hashOperations = redisTemplate.opsForHash();
+        this.listOperations = redisTemplate.opsForList();
     }
 
     public void saveEmployee(Employee employee){
